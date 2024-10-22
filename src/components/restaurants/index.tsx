@@ -1,11 +1,17 @@
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
+import { RestaurantItem } from "./horizontal";
+export interface RestaurantsProps {
+  id: string;
+  name: string;
+  image: string;
+}
 
 export function Restaurants() {
-    const [restaurants, setRestaurants] = useState([])
+  const [restaurants, setRestaurants] = useState<RestaurantsProps[]>([]);
   useEffect(() => {
     async function getFoods() {
-      const response = await fetch("http://192.168.2.56:3000/foods");
+      const response = await fetch("http://192.168.2.56:3000/restaurants");
       const data = await response.json();
       console.log(data);
       setRestaurants(data);
@@ -13,8 +19,12 @@ export function Restaurants() {
     getFoods();
   }, []);
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+    <FlatList
+      data={restaurants}
+      renderItem={({ item }) => <RestaurantItem item={item} />}
+      horizontal={true}
+      contentContainerStyle={{ gap: 14, paddingLeft: 16, paddingRight: 16 }}
+      showsHorizontalScrollIndicator={false}
+    />
   );
 }

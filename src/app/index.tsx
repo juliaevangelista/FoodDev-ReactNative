@@ -6,6 +6,7 @@ import Search from "../components/search";
 import { Section } from "../components/section";
 import { TrendingFoods } from "../components/trending";
 import { Restaurants } from "../components/restaurants";
+import RestaurantVerticalList from "../components/restaurantslist";
 
 const StatusBarHeight = Constants.statusBarHeight;
 
@@ -35,6 +36,13 @@ export default function HomeScreen() {
       size="text-xl"
       />
       <Restaurants/>
+      <Section 
+      name="Restaurantes"
+      label="Veja todos"
+      action={() => console.log("clicou nos restaurantes")}
+      size="text-xl"
+      />
+      <RestaurantVerticalList/>
     </ScrollView>
   );
 }
